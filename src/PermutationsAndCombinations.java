@@ -1,21 +1,26 @@
 public class PermutationsAndCombinations {
-    private double totalObjects;
-    private double positions;
+    private int totalObjects;
+    private int grouping;
 
 
-    public PermutationsAndCombinations(int t, int g){
+    public PermutationsAndCombinations(int t, int g) {
         this.totalObjects = t;
-        this.positions = g;
+        this.grouping = totalObjects - g;
     }
 
-    public double permuations(){
-        double total = this.totalObjects;
-        double pos = total - positions;
-        for(int i = 0; i < total; i++){
-
+    private int factorial(int fact) {
+        int total = 1;
+        int number = fact;
+        for (int i = 1; i <= number; i++) {
+            total = total * i;
         }
-        return 0;
+        return total;
     }
 
-
+    public void permuations() {
+        int total = factorial(totalObjects);
+        int groups = factorial(grouping);
+        int perm = total/groups;
+        System.out.println(perm);
+    }
 }
