@@ -55,6 +55,10 @@ public class MonteCarloSimulation {
                 }
             }
         }
+        double percentSame = (counter1/rounds) * 100;
+        double percentDiff = (counter2/rounds) * 100;
+        System.out.printf("The contestant did not change their answer: %.2f\n", percentSame);
+        System.out.printf("The contestant changed their answer: %.2f", percentDiff);
     }
 
     private boolean alreadyUsed(int[] a, int size, int val){
@@ -65,16 +69,5 @@ public class MonteCarloSimulation {
         }
         return false;
     }
-
-    public void results(){
-        double percentSame = (counter1/rounds) * 100;
-        double percentDiff = (counter2/rounds) * 100;
-        System.out.printf("The contestant did not change their answer: %.2f\n", percentSame);
-        System.out.printf("The contestant changed their answer: %.2f", percentDiff);
-
-    }
-
-
-
 
 }

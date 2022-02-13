@@ -8,20 +8,24 @@ public class MeanMedianModeStandDev {
 
     public double getMean(){
         double mean = 0;
-        for (int j : array) {
-            mean = mean + j;
+        for(int i = 0; i < array.length; i++){
+            mean = mean + array[i];
         }
         return mean/array.length;
     }
 
     public double getMedian(){
-        int median;
+        double median = 0;
+
         for(int i = 0; i < array.length - 1; i++){
+
+            int min_index = i;
             for(int j = i + 1; j < array.length; j++){
 
                 if(array[j] < array[i]){
-                    int temp = array[j];
-                    array[j] = array[i];
+                    min_index = j;
+                    int temp = array[min_index];
+                    array[min_index] = array[i];
                     array[i] = temp;
                 }
             }
@@ -35,9 +39,9 @@ public class MeanMedianModeStandDev {
     }
 
     public double getMode(){
-        int count1;
+        int count1 = 0;
         int count2 = 0;
-        int popular1;
+        int popular1 = 0;
         int popular2 = 0;
 
         for(int i = 0; i < array.length; i++) {
@@ -59,26 +63,25 @@ public class MeanMedianModeStandDev {
 
     public double STD(){
         double mean = 0;
-        if(array.length == 1)return array[0];
+        if(array.length == 1)return 1;
         if(array.length == 0)return 0;
-        for (int k : array) {
-            mean = mean + k;
-        }
+        for(int i = 0; i < array.length; i++)mean = mean + array[i];
 
         mean = mean/array.length;
         double sumOfTempValues = 0;
 
-        for (int j : array) {
-            double tempValues = Math.pow(j - mean, 2);
+        for(int i = 0; i < array.length; i++){
+            double tempValues = Math.pow(array[i] - mean, 2);
             sumOfTempValues = sumOfTempValues + tempValues;
         }
+        double results = Math.sqrt(sumOfTempValues/(array.length - 1));
 
-        return  Math.sqrt(sumOfTempValues/(array.length - 1));
+        return results;
     }
 
     public void print(){
-        for (int j : array) {
-            System.out.println(j);
+        for(int i = 0; i < array.length; i++){
+            System.out.println(array[i]);
         }
     }
 }
