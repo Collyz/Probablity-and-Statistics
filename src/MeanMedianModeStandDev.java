@@ -4,6 +4,10 @@ public class MeanMedianModeStandDev {
 
     public MeanMedianModeStandDev(){
         this.array1 = new int[]{4, 2, 5};
+        getMean();
+        getMedian();
+        getMode();
+        getSTD();
     }
 
     public double getMean(){
@@ -64,7 +68,7 @@ public class MeanMedianModeStandDev {
         return frequentTwo;
     }
 
-    public double STD(){
+    public double getSTD(){
         double mean = 0;
         if(array1.length == 1)return 1;
         if(array1.length == 0)return 0;
