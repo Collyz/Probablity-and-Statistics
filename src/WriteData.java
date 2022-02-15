@@ -28,7 +28,7 @@ public class WriteData {
         for(int i = 0; i < row; i++){
             id[i][0] = i + 1;
             for(int j = 1; j < column; j++){
-                id[i][j] = rand.nextInt(1000) + 1;
+                id[i][j] = rand.nextInt(1000);
             }
         }
     }

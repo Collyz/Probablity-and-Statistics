@@ -69,20 +69,20 @@ public class MeanMedianModeStandDev {
     }
 
     public double getSTD(){
-        double mean = 0;
         if(array1.length == 1)return 1;
         if(array1.length == 0)return 0;
-        for(int i = 0; i < array1.length; i++)mean = mean + array1[i];
 
-        mean = mean/array1.length;
+        double mean = getMean();
         double sumOfTempValues = 0;
 
         for(int i = 0; i < array1.length; i++){
             double tempValues = Math.pow(array1[i] - mean, 2);
             sumOfTempValues = sumOfTempValues + tempValues;
         }
-        double results = Math.sqrt(sumOfTempValues/(array1.length - 1));
-        System.out.println("Standard Deviation: " + results);
-        return results;
+        double standDev = Math.sqrt(sumOfTempValues/(array1.length));
+        double variance = sumOfTempValues/(array1.length - 1);
+        System.out.println("Variance: " + variance);
+        System.out.println("Standard Deviation: " + standDev);
+        return standDev;
     }
 }
