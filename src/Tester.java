@@ -4,7 +4,6 @@ public class Tester {
         MeanMedianModeStandDev test1 = new MeanMedianModeStandDev();
         PermutationsAndCombinations test2 = new PermutationsAndCombinations(15, 3);
         SetOperations test3 = new SetOperations();
-        BirthdayProgram test4 = new Person(23, 1);
 
     }
 }

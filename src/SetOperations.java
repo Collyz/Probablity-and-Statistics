@@ -8,6 +8,9 @@ public class SetOperations {
     public SetOperations(){
         System.out.println("Set 1 : " + setOne);
         System.out.println("Set 2 : " + setTwo);
+        setUnion();
+        setIntersect();
+        setComplement();
     }
 
     public void setUnion(){
@@ -45,7 +48,7 @@ public class SetOperations {
                 }
             }
         }
-        System.out.println("Complement of  " + setTwo);
+        System.out.println("Complement of Set 1" + setTwo);
     }
 
 }

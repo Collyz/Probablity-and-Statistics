@@ -12,8 +12,8 @@ public class Person extends BirthdayProgram{
         this.birthdayMonth = 0;
         this.success = 0;
 
-        birthday = new int[2][numPeople];
-        for(int i = 0; i < runs; i++){
+        birthday = new int[2][getPeople()];
+        for(int i = 0; i < getRuns(); i++){
             for(int j = 0; j < birthday[0].length; j++){
                 birthdayMonth = rand.nextInt(12) + 1;
                 birthdayDay = rand.nextInt(30) + 1;
@@ -35,7 +35,8 @@ public class Person extends BirthdayProgram{
             clearCount();
         }
         success = success/numPeople;
-        System.out.println(success);
+        System.out.println("With " + getPeople() + " people, there was a success of: " +
+                success + "where a percent above 0 means there was a match");
         success = 0;
     }
     public int getBirthdayDay(){
