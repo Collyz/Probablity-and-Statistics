@@ -2,8 +2,8 @@ import java.util.Random;
 public class Person extends BirthdayProgram{
     int birthdayDay;
     int birthdayMonth;
-    int[][] array;
-    int success;
+    int[][] birthday;
+    double success;
 
     public Person(int numPeople, int runs){
         super(numPeople, runs);
@@ -12,25 +12,31 @@ public class Person extends BirthdayProgram{
         this.birthdayMonth = 0;
         this.success = 0;
 
-        array = new int[2][numPeople];
+        birthday = new int[2][numPeople];
         for(int i = 0; i < runs; i++){
-            for(int j = 0; j < array[0].length; j++){
-                birthdayMonth = rand.nextInt(365) + 1;
+            for(int j = 0; j < birthday[0].length; j++){
+                birthdayMonth = rand.nextInt(12) + 1;
                 birthdayDay = rand.nextInt(30) + 1;
-                array[0][j] = birthdayMonth;
+                birthday[0][j] = birthdayMonth;
+                birthday[1][j] = birthdayDay;
             }
-            for(int k = 1; k < array[0].length; k++){
-                if(array[0][k] == array[0][k - 1]){
+            
+            for(int k = 0; k < birthday[0].length; k++){
+                for(int l = k + 1; l < birthday[0].length; l++) {
+                    if ((birthday[0][k] == birthday[0][l]) && (birthday[1][k] == birthday[1][l])) {
                         plusCount();
+                        System.out.println(getCount());
+                        if(getCount() <= 1){
+                            success++;
+                        }
+                    }
                 }
-            }
-            System.out.println(getCount());
-            if(getCount() <= 1){
-                success++;
             }
             clearCount();
         }
+        success = success/numPeople;
         System.out.println(success);
+        success = 0;
     }
     public int getBirthdayDay(){
         return birthdayDay;
