@@ -1,8 +1,8 @@
-public class MeanMedianModeStandDev {
+public class MeanMedianModeStandDevVariance {
 
     private int[] array1;
 
-    public MeanMedianModeStandDev(){
+    public MeanMedianModeStandDevVariance(){
         this.array1 = new int[]{4, 2, 5};
         getMean();
         getMedian();
