@@ -1,27 +1,48 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.Random;
 
 public class WriteData {
+    private String titleColumnOne;
+    private String titleColumnTwo;
+    private int rows;
+    private int columns;
+    private int[][] id;
     private FileWriter fw;
     private BufferedWriter br;
 
-    public WriteData(){
+    public WriteData(String columnOne, String columnTwo, int row, int column){
+        this.titleColumnOne = columnOne;
+        this.titleColumnTwo = columnTwo;
+        this.rows = row;
+        this.columns = column;
+        Random rand = new Random();
+        this.id = new int[rows][columns];
+
         try{
-            fw = new FileWriter("ExampleOutput.csv");
-            br = new BufferedWriter(fw);
+            this.fw = new FileWriter("ExampleOutput.csv");
+            this.br = new BufferedWriter(fw);
         }catch(Exception e){
             System.out.println("ERROR OCCURED: " + e.toString());
         }
+        for(int i = 0; i < row; i++){
+            id[i][0] = i + 1;
+            for(int j = 1; j < column; j++){
+                id[i][j] = rand.nextInt(1000) + 1;
+            }
+        }
     }
 
-    public void outputSingleLine(String string1, int[][] array1){
+    public void output(){
         try {
-            br.write(string1);
+            br.write(titleColumnOne);
+            br.write(",");
+            br.write(titleColumnTwo);
             br.newLine();
-            for (int[] ints : array1) {
-                br.write(String.valueOf(ints[0]));
+            for (int i = 0; i < rows; i++) {
+                br.write(String.valueOf(id[i][0]));
                 br.write(",");
-                br.write(String.valueOf(ints[1]));
+                br.write(String.valueOf(id[i][1]));
                 br.newLine();
             }
             br.close();
