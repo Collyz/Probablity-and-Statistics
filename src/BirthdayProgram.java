@@ -37,7 +37,8 @@ public class BirthdayProgram extends Persons{
             clearCount();
         }
         success = (success/getRuns()) * 100;
-        System.out.println("Odds of two people sharing the same birthday in a group of " + getPeople() + " is " + success);
+        System.out.println("Odds of two people sharing the same birthday in a group of " + getPeople() + " is "
+                + success + "%");
         success = 0;
         return success;
     }
