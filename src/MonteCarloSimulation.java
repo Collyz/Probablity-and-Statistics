@@ -8,11 +8,11 @@ public class MonteCarloSimulation {
     private double counter2;
     private int rounds;
 
-    public MonteCarloSimulation(){
+    public MonteCarloSimulation(int r){
         this.rand = new Random();
         this.contestantPick = new int[3];
         this.array = new int[3];
-        this.rounds = 10000;
+        this.rounds = r;
     }
 
     public void gameShow(){

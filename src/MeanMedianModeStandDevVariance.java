@@ -4,10 +4,11 @@ import java.util.Random;
 public class MeanMedianModeStandDevVariance {
 
     private int[] arrayOne;
+    Random rand;
 
     public MeanMedianModeStandDevVariance(int size, int bound){
-        Random rand = new Random();
         this.arrayOne = new int[size];
+        rand = new Random();
         for(int i = 0; i < arrayOne.length; i++){
             arrayOne[i] = rand.nextInt(10) + 1;
         }
