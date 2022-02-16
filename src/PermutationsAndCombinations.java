@@ -10,23 +10,26 @@ public class PermutationsAndCombinations {
         this.totalObjects = BigInteger.valueOf(allObjects);
         this.grouping = BigInteger.valueOf(groupOfObjects);
         this.totalMinusGroup = totalObjects.subtract(BigInteger.valueOf(groupOfObjects));
-        permutations();
-        combinations();
     }
 
-    public void permutations() {
+    public void runAll() {
+        System.out.println("Permutation is: " + permutations());
+        System.out.println("Combination is: " + combinations() + "\n");
+    }
+
+    public BigInteger permutations() {
         BigInteger total = factorial(totalObjects);
         BigInteger groups = factorial(totalMinusGroup);
         BigInteger perm = total.divide(groups);
-        System.out.println("Permutation is: " + perm);
+        return perm;
     }
 
-    public void combinations(){
+    public BigInteger combinations(){
         BigInteger total = factorial(totalObjects);
         BigInteger possibleGroups = factorial(totalMinusGroup);
         BigInteger groups = factorial(grouping);
         BigInteger combination = total.divide((groups.multiply(possibleGroups)));
-        System.out.println("Combination is: " + combination);
+        return combination;
     }
 
     private BigInteger factorial(BigInteger num) {
@@ -39,4 +42,5 @@ public class PermutationsAndCombinations {
         }
         return factorial;
     }
+
 }

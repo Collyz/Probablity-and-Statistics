@@ -1,9 +1,11 @@
 public class Tester {
     public static void main(String[] args){
 
-        MeanMedianModeStandDevVariance test1 = new MeanMedianModeStandDevVariance();
+        MeanMedianModeStandDevVariance test1 = new MeanMedianModeStandDevVariance(5, 10);
+        test1.runAll();
         PermutationsAndCombinations test2 = new PermutationsAndCombinations(15, 3);
-        SetOperations test3 = new SetOperations();
-
+        test2.runAll();
+        SetOperations test3 = new SetOperations(5, 10);
+        test3.runAll();
     }
 }

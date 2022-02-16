@@ -1,19 +1,33 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Random;
 
 public class SetOperations {
-    private ArrayList<Integer> setOne = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private ArrayList<Integer> setTwo = new ArrayList<Integer>(Arrays.asList(5, 6, 7, 8, 9));
+    private ArrayList<Integer> setOne = new ArrayList<Integer>();
+    private ArrayList<Integer> setTwo = new ArrayList<Integer>();
 
-    public SetOperations(){
-        System.out.println("Set 1 : " + setOne);
-        System.out.println("Set 2 : " + setTwo);
-        setUnion();
-        setIntersect();
-        setComplement();
+    public SetOperations(int size, int bound){
+        Random rand = new Random();
+        for(int i = 0; i < size; i++){
+            setOne.add(rand.nextInt(bound) + 1);
+            setTwo.add(rand.nextInt(bound) + 1);
+        }
     }
 
-    public void setUnion(){
+    public SetOperations(ArrayList set1, ArrayList set2){
+        this.setOne = set1;
+        this.setTwo = set2;
+    }
+
+    public void runAll(){
+        System.out.println("Set 1 : " + setOne);
+        System.out.println("Set 2 : " + setTwo);
+        System.out.println("Union of the two sets: " + setUnion());
+        System.out.println("Intersect of the two sets:" + setIntersect());
+        System.out.println("Complement of Set 1 " + setComplement() + "\n");
+    }
+
+    public ArrayList setUnion(){
         ArrayList<Integer> union = new ArrayList<>();
         union.addAll(setOne);
         union.addAll(setTwo);
@@ -24,10 +38,10 @@ public class SetOperations {
                 }
             }
         }
-        System.out.println("Union of the two sets: " + union);
+        return union;
     }
 
-    public void setIntersect(){
+    public ArrayList setIntersect(){
         ArrayList<Integer> intersect = new ArrayList<Integer>();
         for(int i = 0; i < setOne.size(); i++){
             for(int j = 0; j < setTwo.size(); j++){
@@ -36,10 +50,10 @@ public class SetOperations {
                 }
             }
         }
-        System.out.println("Intersect of the two sets:" + intersect);
+        return intersect;
     }
 
-    public void setComplement(){
+    public ArrayList setComplement(){
         ArrayList<Integer> complement = new ArrayList<Integer>();
         for(int i = 0; i < setOne.size(); i++){
             for(int j = 0; j < setTwo.size(); j++){
@@ -48,7 +62,8 @@ public class SetOperations {
                 }
             }
         }
-        System.out.println("Complement of Set 1" + setTwo);
+        complement = setTwo;
+        return complement;
     }
 
 }
