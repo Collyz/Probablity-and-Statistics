@@ -1,7 +1,7 @@
-public class Tester {
+public class TestOne {
     public static void main(String[] args){
 
-        MeanMedianModeStandDevVariance test1 = new MeanMedianModeStandDevVariance(5, 10);
+        MeanMedianModeStandDevVariance test1 = new MeanMedianModeStandDevVariance(10, 10);
         test1.runAll();
         PermutationsAndCombinations test2 = new PermutationsAndCombinations(15, 3);
         test2.runAll();

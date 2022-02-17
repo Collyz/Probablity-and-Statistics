@@ -1,12 +1,12 @@
 import java.util.Random;
 public class MonteCarloSimulation {
 
-    private int[] array;
-    private int[] contestantPick;
-    private Random rand;
-    private double counter1;
-    private double counter2;
-    private int rounds;
+    private int[] array;  //The array mimics the three curtains
+    private int[] contestantPick;  //The contestants pick
+    private Random rand;  //Object to create random numbers
+    private double counter1;  //Counts correct guesses when the contestant does now change their answer
+    private double counter2;  //Counts correct guesses when the contestant does change their answer
+    private int rounds;  //How many times the program will be run
 
     public MonteCarloSimulation(int r){
         this.rand = new Random();
@@ -63,6 +63,8 @@ public class MonteCarloSimulation {
         System.out.println("%");
     }
 
+    //Checks if a number 1 - 3 has been used for the value behind the door and returns a boolean
+    //Used exclusively by the gameShow() method
     private boolean alreadyUsed(int[] a, int size, int val){
         for(int i = 0; i < size; i++){
             if(a[i] == val){
