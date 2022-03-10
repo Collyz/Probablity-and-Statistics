@@ -1,7 +1,9 @@
+import java.math.*;
+
 public class tester {
     public static void main(String[] args){
 
-        BinomialDistribution test = new BinomialDistribution();
-        System.out.println(test.bionomialDistribution(10, 7, .8));
+        TchebysheffTheorem test = new TchebysheffTheorem();
+        System.out.println(test.tchebysheffTheorem(2));
     }
 }
