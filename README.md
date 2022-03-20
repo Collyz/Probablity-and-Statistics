@@ -1,20 +1,20 @@
 # Probablity-and-Statistics
 Contains Probability and Statistic Java classes **Work in progress**
 
-Included Are:
+Included in ProjectOne:
+- Birthday Program
+    - Determines the likelyhood of two people sharing the same birthday given a group size
 
+ - Monty Hall Program
+    - Able to find the probability of winning the Monty Hall Game given they either change or do not change their answer.
+
+Included in ProjectTwo:
  - Distribution Programs
     - Binomial Distribution
     - Geometric Distribution
     - Hypergeometric Distribution
     - Poisson Distribution
     - Tchebysheff's Theorem
-
- - Birthday Program
-    - Determines the likelyhood of two people sharing the same birthday given a group size
-
- - Monty Hall Program
-    - Able to find the probability of winning the Monty Hall Game given they either change or do not change their answer.
 
  - Data Writing
     - Contains several programs that can manipulate and create .csv (Comma Separated Value) files.
