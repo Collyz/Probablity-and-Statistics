@@ -23,4 +23,3 @@ Included Are:
     - Salter takes Plotter's data and adds or subtracts randomly to the y values given a user input bound for each x.
     - Smoother takes Salter's data and takes the average of a user input bound.
 
- - 
