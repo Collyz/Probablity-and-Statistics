@@ -1,5 +1,5 @@
 # Probablity-and-Statistics
-Contains Probability and Statistic Java classes ***Work in progress***
+Contains Probability and Statistic Java classes ***Work in Progress***
 
 Included in ProjectOne:
 - Birthday Program
