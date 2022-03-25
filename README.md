@@ -34,29 +34,22 @@ Branchs:
  - PokerHand
       Contains:
     - **Card.java** - A pseudo card that contains a number and suite
-    - **CardDeckTester.java** - Tests HandEvaulator 10,000
+    - **CardDeckTester.java** - Tests HandEvaulator.java hand checks 10,000 times
     - **Deck.java** - A pseudo deck that contains 52 cards
     - **HandEvaluator.java** - Evaluates a pseudo poker hand for several poker hands 
-                           (Checks pair, two pairs, Three of a kind, Flush, Straight, 
+                           (Checks pair, two pairs, Three of a kind, Straight, Full House, Flush, Four of a Kind)
     - **PokerHand Screenshot.jpg - Screenshot of the results after shuffling a hand 10,000 times
- - PokerHand
-      Contains java programs required to create a pseudo poker hand where several 
-      pokerhand probabilities can be checked
-    - **Card.java** - 
-    - **CardDeckTester.java** - 
-    - **Deck.java** - 
-    - **HandEvaluator.java** - 
-    - **PokerHand Screenshot.jpg** - 
 
  - ProjectOne
-      Contains: Code from ProjectOne** - 
-    - **BirthdayProgram.java** - 
-    - **MeanMedianModeStandDevVariance.java** - 
-    - **MonteCarloSimulation.java** - 
-    - **PermutationsAndCombinations.java** - 
-    - **Person.java** - 
-    - **SetOperations.java** - 
-    - **TestOne.java** - 
-    - **TestTwo.java** - 
-    - **WriteData.java** - 
+      Contains: Code from **ProjectOne** 
+    - **BirthdayProgram.java** - Stores the number of people and runs to be done to check birthdays
+    - **MeanMedianModeStandDevVariance.java** - Mean, Median, Mode, Standard Deviation and Variance calculator
+    - **MonteCarloSimulation.java** - Simulates the Monte Hall Game and can run it multiple times
+    - **PermutationsAndCombinations.java** - A permutations and and combinations calculator
+    - **Person.java** - Evaluates a given group size the probability of two people sharing the same birthday
+    - **SetOperations.java** - A set operations calculator
+    - **TestOne.java** - Tests MeanMedianModeStandDevVariance.java, PermutationsAndCombinations.java and SetOperations.java
+    - **TestTwo.java** - Tests WriteData.java, Person.java, MonteCarloSimulation.java
+    - **WriteData.java** - Creates a csv file that has 1000 people's favorite number
+                           Left side number 1 - 1000 | Right side a random number 1-1000
 
