@@ -1,5 +1,5 @@
 # Probablity-and-Statistics
-Contains Probability and Statistic Java classes 
+Contains Probability and Statistic Java classes with accompanied documents
 
 Branchs:
  - Main
