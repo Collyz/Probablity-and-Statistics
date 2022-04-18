@@ -3,21 +3,21 @@ Contains Probability and Statistic Java classes with accompanied documents
 
 Folders
  - Project 1
-      Contains: Code from **Project One** 
-    - **BirthdayProgram.java** - Stores the number of people and runs to be done to check birthdays
-    - **MeanMedianModeStandDevVariance.java** - Mean, Median, Mode, Standard Deviation and Variance calculator
-    - **MonteCarloSimulation.java** - Simulates the Monte Hall Game and can run it multiple times
-    - **PermutationsAndCombinations.java** - A permutations and and combinations calculator
-    - **Person.java** - Evaluates a given group size the probability of two people sharing the same birthday
-    - **SetOperations.java** - A set operations calculator
-    - **TestOne.java** - Tests MeanMedianModeStandDevVariance.java, PermutationsAndCombinations.java and SetOperations.java
-    - **TestTwo.java** - Tests WriteData.java, Person.java, MonteCarloSimulation.java
-    - **WriteData.java** - Creates a csv file that has 1000 people's favorite number
-                           Left side number 1 - 1000 | Right side a random number 1-1000
+    - Purpose::
+    - To implement basic statistics principles such as mean, median, mode etc, into programming. 
+      To learn how to create and write to a file as well as create a Monte Carlo simulation for the 
+      Monty Hall problem.
                            
  - Project 2
-      Contains: Code from **Project Two** 
+    - Purpose:
+    - To create multiple distribution calculating programs that give the distribution result as well as 
+      their expected and variance values. Distributions include, binomial, geometric, hypergeometric, poisson.
+      More file manipulation was learned to create points for the graph of x^2. This data was then salted and then smoothed.
       
- - Project 3
-      Contains: Code from **Project Three** ***WIP***
+      
+ - Project 3 ***WIP***
+    - Purpose
+    - Learn how to use existing jar libraries to create graphs of the previous projects salted data. The libraries used are
+      Apache Commons Mathematics and JFreeChart. An online database will be used to test every distribution from the previous
+      project.
       
