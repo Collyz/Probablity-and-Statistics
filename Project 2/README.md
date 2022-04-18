@@ -1,13 +1,10 @@
-# Probablity-and-Statistics
-Contains Probability and Statistic Java classes 
+# Project 2
+Project Two Contents
 
-Branchs:
- - Main
-      Contains:
-    - **README.md** - Location of desired code
-    - **Project Two.docx** - Description of the project
-    - **Stats Formulas.docx** - Formulas from textbook
-    - **Graphs.xlsx** - Graphs for the datawriting programs
+  - **README.md** - Location of desired code
+  - **Project Two.docx** - Description of the project
+  - **Stats Formulas.docx** - Formulas from textbook
+  - **Graphs.xlsx** - Graphs for the datawriting programs
 
  - DataWriting
       Contains:
@@ -39,17 +36,3 @@ Branchs:
     - **HandEvaluator.java** - Evaluates a pseudo poker hand for several poker hands 
                            (Checks pair, two pairs, Three of a kind, Straight, Full House, Flush, Four of a Kind)
     - **PokerHand Screenshot.jpg - Screenshot of the results after shuffling a hand 10,000 times
-
- - ProjectOne
-      Contains: Code from **ProjectOne** 
-    - **BirthdayProgram.java** - Stores the number of people and runs to be done to check birthdays
-    - **MeanMedianModeStandDevVariance.java** - Mean, Median, Mode, Standard Deviation and Variance calculator
-    - **MonteCarloSimulation.java** - Simulates the Monte Hall Game and can run it multiple times
-    - **PermutationsAndCombinations.java** - A permutations and and combinations calculator
-    - **Person.java** - Evaluates a given group size the probability of two people sharing the same birthday
-    - **SetOperations.java** - A set operations calculator
-    - **TestOne.java** - Tests MeanMedianModeStandDevVariance.java, PermutationsAndCombinations.java and SetOperations.java
-    - **TestTwo.java** - Tests WriteData.java, Person.java, MonteCarloSimulation.java
-    - **WriteData.java** - Creates a csv file that has 1000 people's favorite number
-                           Left side number 1 - 1000 | Right side a random number 1-1000
-
