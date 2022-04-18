@@ -4,7 +4,6 @@ Project Two Contents
   - **README.md** - Location of desired code
   - **Project Two.docx** - Description of the project
   - **Stats Formulas.docx** - Formulas from textbook
-  - **Graphs.xlsx** - Graphs for the datawriting programs
 
  - DataWriting
       Contains:
