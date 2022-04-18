@@ -10,7 +10,7 @@ Birthday and Monte Carlo
    - **WriteData.java** - Creates a csv file that has 1000 people's favorite number
                           Left side number 1 - 1000 | Right side a random number 1-1000
                           
-                           
+Stats Library                           
    - **MeanMedianModeStandDevVariance.java** - Mean, Median, Mode, Standard Deviation and Variance calculator
    - **PermutationsAndCombinations.java** - A permutations and and combinations calculator
    - **SetOperations.java** - A set operations calculator
