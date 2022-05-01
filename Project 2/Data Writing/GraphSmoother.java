@@ -2,6 +2,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class GraphSmoother{
@@ -53,25 +55,25 @@ public class GraphSmoother{
             bw.write(" , ");     //Separated by comma
             bw.write(columnTwo);     //Column name
             bw.newLine();            //New line to start the x and y values
-            int tempX = 0;               //Temporarily stores the x value to be written
-            double yAverage = 0;     //Temporarily stores the average of the y values
-            while(!yValues.isEmpty()){
+            int yAverage = 0;        //Temporarily stores the average of the y values
+            Queue<Integer> movingSum = new LinkedList<>();
+            int sum = 0;
+            while(!yValues.isEmpty() && !xValues.isEmpty()) {
                 for(int i = 0; i < bound; i++){
-                    if(!yValues.isEmpty()) {
-                        yAverage = yAverage + yValues.remove(0);  //Sum calculation
+                    if(!yValues.isEmpty() && !xValues.isEmpty()) {
+                        int tempX = xValues.remove(0);          //Temporarily stores the x value to be written
+                        int tempY = yValues.remove(0);          //Temporarily stores the y value to be written
+                        sum += tempY;
+                        movingSum.add(tempY);
+                        if(movingSum.size() > bound){
+                            sum -= movingSum.remove();
+                        }
+                        yAverage = (sum) / bound;
+                        bw.write(String.valueOf(tempX));
+                        bw.write(" , ");
+                        bw.write(String.valueOf(yAverage));
+                        bw.newLine();
                     }
-                }
-                yAverage = yAverage/bound;  //Average calculation
-
-                for(int j = 0; j < bound; j++) {
-                    if(!xValues.isEmpty()) {
-                        tempX = xValues.remove(0);
-                    }
-                    else{break;}
-                    bw.write(String.valueOf(tempX));    //Writing the x value
-                    bw.write(" , ");                //Separate with comma
-                    bw.write(String.valueOf(yAverage)); //Writing the average y value of a given 'bound' y values
-                    bw.newLine();                       //New line to print the next x and y values
                 }
             }
 
