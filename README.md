@@ -3,7 +3,7 @@ Contains Probability and Statistic Java classes with accompanied documents
 
 Folders
  - Project 1
-    - Purpose::
+    - Purpose:
     - To implement basic statistics principles such as mean, median, mode etc, into programming. 
       To learn how to create and write to a file as well as create a Monte Carlo simulation for the 
       Monty Hall problem.
@@ -16,8 +16,10 @@ Folders
       
       
  - Project 3 ***WIP***
-    - Purpose
+    - Purpose:
     - Learn how to use existing jar libraries to create graphs of the previous projects salted data. The libraries used are
-      Apache Commons Mathematics and JFreeChart. An online database will be used to test every distribution from the previous
+      Apache Commons Mathematics and JFreeChart. 
+    - An online database will be used to test every distribution from the previous
       project.
+    - Use of Octave to graph salted data and then smooth the data. Teaches how to use foreign api and impliment it
       
