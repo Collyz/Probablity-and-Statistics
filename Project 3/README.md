@@ -2,7 +2,7 @@
 Project Three Contents
 
  - **README.md**  - Location of desired code
- - **ProjectThreeEssay.docx** - Description of the project
+ - **ProjectThreeEssay.docx** - Description of the project. Includes questions based off of data set
  - **StatsFormulas.docx** - Formulas from the textbook
 
 - **ApacheAndJFreeCharts** contains:
