@@ -14,7 +14,6 @@ Folders
       their expected and variance values. Distributions include, binomial, geometric, hypergeometric, poisson.
       More file manipulation was learned to create points for the graph of x^2. This data was then salted and then smoothed.
       
-      
  - Project 3
     - Purpose:
     - Learn how to use existing jar libraries to create graphs of the previous projects salted data. The libraries used are
