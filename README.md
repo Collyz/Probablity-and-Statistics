@@ -1,5 +1,6 @@
 # Probablity-and-Statistics
-Contains Probability and Statistic Java classes with accompanied documents
+Contains Probability and Statistic Java classes with accompanied documents.
+Created for CSIS-3327 Probability and Applied Statistis Spring 2022
 
 Folders
  - Project 1
