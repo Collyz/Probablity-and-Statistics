@@ -11,11 +11,11 @@ public class WriteData {
     private FileWriter fw;
     private BufferedWriter br;
 
-    public WriteData(String columnOne, String columnTwo, int row, int column){
+    public WriteData(String columnOne, String columnTwo, int row, int columns){
         this.titleColumnOne = columnOne;
         this.titleColumnTwo = columnTwo;
         this.rows = row;
-        this.columns = column;
+        this.columns = columns;
         Random rand = new Random();
         this.id = new int[rows][columns];
 
@@ -27,7 +27,7 @@ public class WriteData {
         }
         for(int i = 0; i < row; i++){
             id[i][0] = i + 1;
-            for(int j = 1; j < column; j++){
+            for(int j = 1; j < columns; j++){
                 id[i][j] = rand.nextInt(1000);
             }
         }
