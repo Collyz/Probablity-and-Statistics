@@ -3,7 +3,8 @@ public class Card {
     private int cardNum; //Stores card number
     private String suite; //Stores card suite
 
-    /** The Constructor for the class.
+    /** 
+     * The Constructor for the class.
      * Initializes private variables cardNum and suite using the accepted parameters
      * @param suite
      * @param cardNum
@@ -13,12 +14,12 @@ public class Card {
         this.suite = suite;
     }
 
-    /** The method 'toString' accepts no parameters
+    /**
      * It is used when wanting to print the value of a card
      * Cards of value 1 are "Ace"
-     *          value 11 are "Jack"
-     *          value 12 are "Queen"
-     *          value 13 are "King"
+     *       value 11 are "Jack"
+     *       value 12 are "Queen"
+     *       value 13 are "King"
      */
     public String toString(){
         String name = "";
@@ -37,15 +38,20 @@ public class Card {
         else{
             name = Integer.toString(cardNum);
         }
-        String formatted = name + " of " + suite;
-        return formatted;
+        return name + " of " + suite;
     }
 
-    //This method 'getCardNum' returns the number of the card
+    /**
+     * Returns the number of the card
+     * @return Card number
+     */
     public int getCardNum(){
         return cardNum;
     }
-    //This method 'getSuite' returns the suite of the card
+    /**
+     * Returns the suite of the card i.e. 'Spades, Hearts, Diamongs, Clubs'
+     * @return Card Suite
+     */
     public String getSuite(){
         return suite;
     }

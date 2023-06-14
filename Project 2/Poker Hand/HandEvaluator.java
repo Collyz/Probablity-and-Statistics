@@ -1,34 +1,40 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HandEvaluator {
 
     private Deck deck;  //Creates the deck to evaluate
     private ArrayList<Card> hand;   //Creates the hand to evaluate
 
-    //Constructor of the class accepts no parameters. It initializes all private variables and populates the deck with Card objects
+    /**
+    * Constructor of the class accepts no parameters.
+    * It populates the deck with Card objects.
+    */
     public HandEvaluator(){
         deck = new Deck();
         deck.fillDeck();
         hand = new ArrayList<>();
     }
 
-    //Method 'drawFive' accepts no parameters.
-    //It fills the ArrayList hand with 5 random cards from the deck
+    /**
+    * Fills the ArrayList 'hand' with 5 random cards from the deck
+    * @return Boolean that is determine by the success of 5 cards being drawn successfully
+    */
     public boolean drawFive(){
         //If the hand ArrayList "hand" is not empty, this removes all cards in hand
-        if(hand.size() > 0 ){
+        if(hand.size() != 0 ){
             hand.clear();
         }
         //Checks to see if cards can still be drawn. If true then 5 cards are drawn and displayed
         if(deck.handStatus()) {
-            String print = "";
+            //String print = "";
             deck.shuffle();
             //Draws 5 Cards and puts them into the ArrayList hand
             for (int i = 0; i < 5; i++) {
                 hand.add(deck.drawCard());
-                print = print + hand.get(i) + " | ";
+                //print += hand.get(i) + " | ";
             }
-            print = print.substring(0, print.length() - 2); //Allows for the 5 cards that are drawn to be displayed if needed
+            //print = print.substring(0, print.length() - 2); //Allows for the 5 cards that are drawn to be displayed if needed
             //System.out.println(print);
             return true;
         }
@@ -37,31 +43,37 @@ public class HandEvaluator {
             return false;
         }
     }
-    //The method 'checkPair' accepts no parameters and returns true if there is only a single pair in the hand.
+
+    /**
+     * Checks to find a single pair in the hand
+     * @return Boolean that is determine from only a single pair being in the hand
+     */
     public boolean checkPair(){
         int counter = 0;
         //Double for loops check for pairs and add one to counter each time a pair is found
         for(int i = 0; i < hand.size(); i++){
             for(int j = i + 1; j < hand.size(); j++){
-                if( hand.get(i).getCardNum() == hand.get(j).getCardNum()){
+                if(hand.get(i).getCardNum() == hand.get(j).getCardNum()){
                     counter++;
                 }
             }
         }
-        //If only one pair is found then the method returns true
-        if(counter == 1){
-            return true;
-        }
-        //If more than one pair is found then the method return false
+        
+        // If only one pair is found 
+        if(counter == 1){return true;}
         else if(counter > 1){
+            // If more than one pair is found
             checkTwoPairs();
             return false;
         }
         else{return false;}
     }
 
-    //This method is nearly identical to checkPair however it returns the counter to indicate the number of pairs found in the hand
-    //It is exclusively used in checkFullHouse
+    /**
+     * This method is identical to checkPair however it returns the counter to indicate the number of pairs found in the hand.
+     * It is exclusively used in checkFullHouse
+     * @return The number of pairs in the hand
+     */
     private int checkPairInt(){
         int counter = 0;
         //Double for loops check for pairs and add one to counter each time a pair is found
@@ -76,8 +88,10 @@ public class HandEvaluator {
         return counter;
     }
 
-    //The method 'checkThreeOfKind' accepts no parameters and checks for three of a kind in the hand
-    //Returns true if a three of a kind is found
+    /**
+     * Checks to find a three of a kind in the hand
+     * @return Returns true if a three of a kind is found
+     */
     public boolean checkThreeOfKind(){
         //Keeps track of three of a kinds found
         int counter = 0;
@@ -92,35 +106,36 @@ public class HandEvaluator {
                 }
             }
         }
-        //If one three of a kind is found the method returns true
-        if(counter == 1){
-            return true;
-        }
-        //If no three of a kind is found the method return false
-        else{return false;}
-
+        //If only one three of a kind is found the method returns true
+        return counter == 1;
     }
 
-    //The method 'checkThreeOfKindInt() is nearly identical to the method checkThreeOfKind except this method
-    //returns the counter that holds how many three of a kind were found in the hand. This method is used exclusively in checkFullHouse
+    /**
+     * The method is nearly identical to the method 'checkThreeOfKind' except it returns the number of three of a kind in hand.
+     * Is used exclusively in checkFullHouse
+     * @return Counter that holds how many three of a kind were found in the hand. 
+     */
     private int checkThreeOfKindInt(){
         int counter = 0;
         //Triple for loop to evaluate for three of a kind
         for(int i = 0; i < hand.size(); i++){
             for(int j = i + 1; j < hand.size(); j++){
                 for(int k = j + 1; k < hand.size(); k++) {
-                    //Main check maid to see if three of a kind exists
+                    //Main check for three of a kind
                     if (hand.get(i).getCardNum() == hand.get(j).getCardNum() && hand.get(j).getCardNum() == hand.get(k).getCardNum()) {
                         counter++;
                     }
                 }
             }
         }
-        //returns the number of Three of a Kinds found
+        //Number of Three of a Kinds found
         return counter;
     }
 
-    //The method 'checkTwoPairs' accepts no parameters and returns true if two pairs are found in the hand
+    /**
+     * Checks to find two pairs in the hand
+     * @return The result if and only two pairs were found in the hand
+     */
     public boolean checkTwoPairs(){
         //Keeps track of pairs found
         int counter = 0;
@@ -132,16 +147,15 @@ public class HandEvaluator {
                 }
             }
         }
-        //If there are exactly two pairs then the method returns true
-        if(counter == 2){
-            return true;
-        }
-        //If there aren't two pairs then the method returns false
-        else{return false;}
+        //If only two pairs are found, the method returns true
+        return counter == 2;
 
     }
 
-    //The method 'checkStraight' accepts no parameters and returns true of there is a straight in the hand
+    /**
+     * Checks to find a straight in the hand.
+     * @return The result if and only if a straight were found in the hand
+     */
     public boolean checkStraight(){
         //Keeps track of instances where the card on top is exactly one number greater than the card below it
         int check = 0;
@@ -151,7 +165,7 @@ public class HandEvaluator {
             numbers[i] = hand.get(i).getCardNum();
         }
         //Sorts the numbers from largest to smallest
-        numbers = sort(numbers);
+        numbers = sortDescending(numbers);
         for(int j = 0; j < numbers.length;j++){
             for(int k = j + 1; k < numbers.length; k++){
                 //Check to see if there is a straight
@@ -160,16 +174,27 @@ public class HandEvaluator {
                 }
             }
         }
-        //If there are five instances of a Card above another card being exactly one greater than the one below it then the method returns true
-        if(check == 5){
-            return true;
-        }
-        //If there aren't five instances then the method return false
-        else{return false;}
+
+        /*  */
+        // sortDescending(this.hand);
+        // for(int i = 0; i < hand.size(); i++){
+        //     for(int j = i+1; j < hand.size(); j++){
+        //         if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
+        //             check++;
+        //         }
+        //     }
+        // }
+        /* */
+
+        //If there are five instances of a card being exactly one greater than the one below it then the method returns true
+        return check == 5;
 
     }
 
-    //The method 'checkFullHouse' accepts no parameters and returns true if there is a full house in the hand
+    /**
+     * Checks to find a full house in the hand
+     * @return The result if and only if a a full house is found in the hand
+     */
     public boolean checkFullHouse(){
         int counterOne = checkPairInt();   //Stores the number of pairs found
         int counterTwo = checkThreeOfKindInt();   //Stores the number of three of a kind found
@@ -224,7 +249,7 @@ public class HandEvaluator {
             numbers[i] = hand.get(i).getCardNum();
         }
         //Sorts the numbers from largest to smallest
-        numbers = sort(numbers);
+        numbers = sortDescending(numbers);
         for(int j = 0; j < numbers.length;j++){
             for(int k = j + 1; k < numbers.length; k++){
                 //Checks for cards with the same number
@@ -287,12 +312,13 @@ public class HandEvaluator {
         System.out.printf("Flush: %.2f", (counts[5] / runs) * 100);
         System.out.print("%\n");
         System.out.printf("Four Of A Kind: %.3f", (counts[6] / runs) * 100);
-        System.out.print("%");
+        System.out.print("%\n");
+        
     }
 
     //The method 'sort' is a helper method that is a selection to arrange integers from largest to smallest
     //It accepts a parameter of int[] array and returns an int[] array
-    private int[] sort(int[] array){
+    private int[] sortDescending(int[] array){
         int[] temp = array;
         for(int i = 0; i < temp.length - 1; i++){
             //Stores the largest number found in the array in int maxPos
@@ -301,6 +327,13 @@ public class HandEvaluator {
             swap(temp, maxPos, i);
         }
         return temp;
+    }
+
+    private void sortDescending(ArrayList<Card> hand){
+        for(int i = 0; i < hand.size(); i++){
+            int maxPos = maxPosition(hand, i);
+            swap(hand, maxPos, i);
+        }
     }
 
    //The method 'maxPosition' is a helper class for the method 'sort'. It aids in the selection sort
@@ -318,6 +351,16 @@ public class HandEvaluator {
         return maxPos;
     }
 
+    private int maxPosition(ArrayList<Card> a, int from){
+        int maxPos = from;
+        for(int i = from + 1; i < a.size(); i++){
+            if(a.get(i).getCardNum() > a.get(maxPos).getCardNum()){
+                maxPos = i;
+            }
+        }
+        return maxPos;
+    }
+
     //The method 'swap' is a helper class for the method 'sort'. It aids in the selection sort
     //The method accepts an int[] array 'a', int 'i' and int 'j'
     //The method swaps the values stored at the index values of a[i] and a[j]
@@ -325,5 +368,9 @@ public class HandEvaluator {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
+    }
+
+    private void swap(ArrayList<Card> a, int i, int j){
+        Collections.swap(a, i, j);
     }
 }
