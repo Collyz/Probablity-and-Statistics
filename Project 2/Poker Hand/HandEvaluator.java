@@ -1,5 +1,8 @@
+// https://www.decipherzone.com/blog-detail/top-programming-languages-for-desktop-apps-in-2021
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class HandEvaluator {
 
@@ -7,9 +10,9 @@ public class HandEvaluator {
     private ArrayList<Card> hand;   //Creates the hand to evaluate
 
     /**
-    * Constructor of the class accepts no parameters.
-    * It populates the deck with Card objects.
-    */
+     * Constructor of the class accepts no parameters.
+     * It populates the deck with Card objects.
+     */
     public HandEvaluator(){
         deck = new Deck();
         deck.fillDeck();
@@ -17,9 +20,9 @@ public class HandEvaluator {
     }
 
     /**
-    * Fills the ArrayList 'hand' with 5 random cards from the deck
-    * @return Boolean that is determine by the success of 5 cards being drawn successfully
-    */
+     * Fills the ArrayList 'hand' with 5 random cards from the deck
+     * @return Boolean that is determine by the success of 5 cards being drawn successfully
+     */
     public boolean drawFive(){
         //If the hand ArrayList "hand" is not empty, this removes all cards in hand
         if(hand.size() != 0 ){
@@ -157,43 +160,29 @@ public class HandEvaluator {
      * @return The result if and only if a straight were found in the hand
      */
     public boolean checkStraight(){
-        //Keeps track of instances where the card on top is exactly one number greater than the card below it
+        // If a card is larger than the next, check++
         int check = 0;
-        //Creates an array 'numbers' and stores the hand's Card number values in the array
-        int[] numbers = new int[hand.size()];
-        for(int i = 0; i < numbers.length; i++){
-            numbers[i] = hand.get(i).getCardNum();
-        }
-        //Sorts the numbers from largest to smallest
-        numbers = sortDescending(numbers);
-        for(int j = 0; j < numbers.length;j++){
-            for(int k = j + 1; k < numbers.length; k++){
-                //Check to see if there is a straight
-                if(numbers[j] - 1 == numbers[k]){
+
+        /*  */
+        // Sort the hand in descending order (largest -> smallest)
+        sortDescending(this.hand);
+        for(int i = 0; i < hand.size(); i++){
+            for(int j = i+1; j < hand.size(); j++){
+                if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
                     check++;
                 }
             }
         }
-
-        /*  */
-        // sortDescending(this.hand);
-        // for(int i = 0; i < hand.size(); i++){
-        //     for(int j = i+1; j < hand.size(); j++){
-        //         if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
-        //             check++;
-        //         }
-        //     }
-        // }
         /* */
 
-        //If there are five instances of a card being exactly one greater than the one below it then the method returns true
+        //If there are five instances of a card being exactly one greater than the next returns true
         return check == 5;
 
     }
 
     /**
      * Checks to find a full house in the hand
-     * @return The result if and only if a a full house is found in the hand
+     * @return The result if and only if a full house is found in the hand
      */
     public boolean checkFullHouse(){
         int counterOne = checkPairInt();   //Stores the number of pairs found
@@ -208,7 +197,10 @@ public class HandEvaluator {
         else {return false;}
     }
 
-    //The method 'checkFlush' accepts no parameters and return true if there is a flush in the hand
+    /**
+     * The method 'checkFlush' accepts no parameters and return true if there is a flush in the hand
+     * @return The result if and only if a flush is found in the hand
+     */
     public boolean checkFlush(){
         //Stores the suites of each kind found
         int spadesCount = 0;
@@ -231,15 +223,14 @@ public class HandEvaluator {
             }
         }
         //If there is 5 of the same suite in the hand then the method returns true
-        if(spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5){
-            return true;
-        }
-        //If the cards aren't 5 of the same suite then the method returns false
-        else{return false;}
+        return spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5;
 
     }
 
-    //The method 'checkFourOfKind' accepts no parameters and checks if there are 4 of a kind in the hand
+    /**
+     * Checks if there are 4 of a kind in the hand
+     * @return The result if and only if a 4 of a kind is found in the hand
+     */
     public boolean checkFourOfKind(){
         //Keeps track of pairs found
         int check = 0;
@@ -271,30 +262,52 @@ public class HandEvaluator {
      * @param runs  The number of times to iterate the loop in the method
      */
     public void runAll(int runs) {
+        HashMap<String, Integer> hands = new HashMap<String, Integer>();
+        hands.put("Pair", 0);
+        hands.put("Three of a Kind", 0);
+        hands.put("Two Pairs", 0);
+        hands.put("Straight", 0);
+        hands.put("FullHouse", 0);
+        hands.put("Flush", 0);
+        hands.put("Four of a Kind", 0);
+        hands.put("No Pair", 0);
+        hands.put("Straight Flush", 0);
+        hands.put("Royal Flush", 0);
+        /* TODO: Reorder hands starting with: no pair, one pair, two pair, three of a kind, 
+         * straight, flush, full house, four of a kind, straight flush, royal flush
+          */
+
         //Creates an array 'counts' to store each time one of the checks returns true
         double[] counts = new double[7];
         for(int i = 0; i < runs; i++){
             drawFive();
             if(checkPair()){
                 counts[0] = counts[0] + 1;
+                hands.put("Pair", hands.get("Pair") + 1 );
             }
             if(checkThreeOfKind()){
                 counts[1] = counts[1] + 1;
+                hands.put("Three of a Kind", hands.get("Three of a Kind") + 1 );
             }
             if(checkTwoPairs()){
                 counts[2] = counts[2] + 1;
+                hands.put("Two Pairs", hands.get("Two Pairs") + 1 );
             }
             if(checkStraight()){
                 counts[3] = counts[3] + 1;
+                hands.put("Straight", hands.get("Straight") + 1 );
             }
             if(checkFullHouse()){
                 counts[4] = counts[4] + 1;
+                hands.put("FullHouse", hands.get("FullHouse") + 1 );
             }
             if(checkFlush()){
                 counts[5] = counts[5] + 1;
+                hands.put("Flush", hands.get("Flush") + 1 );
             }
             if(checkFourOfKind()){
                 counts[6] = counts[6] + 1;
+                hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
             }
             deck.reset();
         }
@@ -313,11 +326,15 @@ public class HandEvaluator {
         System.out.print("%\n");
         System.out.printf("Four Of A Kind: %.3f", (counts[6] / runs) * 100);
         System.out.print("%\n");
-        
+                //TODO: add Royal Flush, Straight Flush, No Pair/High Card
+        System.out.println("Pair from map: " + (hands.get("Pair")));
     }
 
-    //The method 'sort' is a helper method that is a selection to arrange integers from largest to smallest
-    //It accepts a parameter of int[] array and returns an int[] array
+    /**
+     * Selection sort to arrange integers in descending order (largest to smallest)
+     * @param array The array of ints to sort
+     * @return A sorted array
+     */
     private int[] sortDescending(int[] array){
         int[] temp = array;
         for(int i = 0; i < temp.length - 1; i++){
@@ -329,16 +346,25 @@ public class HandEvaluator {
         return temp;
     }
 
+    /**
+     * Selection sort to arrange the cards in the hand in descending order (largest to smallest)
+     * @param hand The hand of cards to sort
+     */
     private void sortDescending(ArrayList<Card> hand){
         for(int i = 0; i < hand.size(); i++){
+            //Stores the largest number found in the array in int maxPos
             int maxPos = maxPosition(hand, i);
+            //Swapping the larger number with the smaller number in the array
             swap(hand, maxPos, i);
         }
     }
 
-   //The method 'maxPosition' is a helper class for the method 'sort'. It aids in the selection sort
-   //The method accepts an int[] array 'a' and an integer 'from' which it then returns an int
-   //The int returned is the largest number from the array
+    /**
+     * Helper method for sortDescending, aids in selection sort. Finds the next largest position
+     * @param a The array to use
+     * @param from The index to begin checking from
+     * @return The next largest position
+     */
    private int maxPosition(int[] a, int from) {
         int maxPos = from;
         for (int i = from + 1; i < a.length; i ++)
@@ -351,6 +377,12 @@ public class HandEvaluator {
         return maxPos;
     }
 
+    /**
+     * Helper method for sortDescending, aids in selection sort. Finds the next largest position
+     * @param a The ArrayList to use
+     * @param from The index to begin checking from
+     * @return The next largest position
+     */
     private int maxPosition(ArrayList<Card> a, int from){
         int maxPos = from;
         for(int i = from + 1; i < a.size(); i++){
@@ -364,12 +396,24 @@ public class HandEvaluator {
     //The method 'swap' is a helper class for the method 'sort'. It aids in the selection sort
     //The method accepts an int[] array 'a', int 'i' and int 'j'
     //The method swaps the values stored at the index values of a[i] and a[j]
+    /**
+     * Is a helper method for 'sortDescending'. It swaps two indexes in an array
+     * @param a The array to be used
+     * @param i Index swapped with j
+     * @param j Index swapped with i
+     */
     private void swap(int[] a, int i, int j){
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
     }
 
+    /**
+     * Is a helper method 'sortDescending'. It swaps two indexes in an ArrayList 
+     * @param a The ArrayList to use
+     * @param i Index swapped with j
+     * @param j Index swapped with i
+     */
     private void swap(ArrayList<Card> a, int i, int j){
         Collections.swap(a, i, j);
     }
