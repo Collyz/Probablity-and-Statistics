@@ -48,6 +48,14 @@ public class HandEvaluator {
     }
 
     /**
+     * Checks to find no pairs in the hand
+     * @return Boolean that is determined from a single pair being in the hand
+     */
+    public boolean checkNoPair(){
+        return checkPairInt() == 0;
+    }
+
+    /**
      * Checks to find a single pair in the hand
      * @return Boolean that is determine from only a single pair being in the hand
      */
@@ -74,7 +82,6 @@ public class HandEvaluator {
 
     /**
      * This method is identical to checkPair however it returns the counter to indicate the number of pairs found in the hand.
-     * It is exclusively used in checkFullHouse
      * @return The number of pairs in the hand
      */
     private int checkPairInt(){
@@ -84,7 +91,6 @@ public class HandEvaluator {
             for(int j = i + 1; j < hand.size(); j++){
                 if( hand.get(i).getCardNum() == hand.get(j).getCardNum()){
                     counter++;
-
                 }
             }
         }
@@ -262,72 +268,66 @@ public class HandEvaluator {
      * @param runs  The number of times to iterate the loop in the method
      */
     public void runAll(int runs) {
-        HashMap<String, Integer> hands = new HashMap<String, Integer>();
-        hands.put("Pair", 0);
-        hands.put("Three of a Kind", 0);
-        hands.put("Two Pairs", 0);
-        hands.put("Straight", 0);
-        hands.put("FullHouse", 0);
-        hands.put("Flush", 0);
-        hands.put("Four of a Kind", 0);
-        hands.put("No Pair", 0);
-        hands.put("Straight Flush", 0);
-        hands.put("Royal Flush", 0);
-        /* TODO: Reorder hands starting with: no pair, one pair, two pair, three of a kind, 
+        //Map to hold the values
+        HashMap<String, Double> hands = new HashMap<String, Double>();
+        hands.put("Pair", 0.0);
+        hands.put("Three of a Kind", 0.0);
+        hands.put("Two Pairs", 0.0);
+        hands.put("Straight", 0.0);
+        hands.put("FullHouse", 0.0);
+        hands.put("Flush", 0.0);
+        hands.put("Four of a Kind", 0.0);
+        hands.put("No Pair", 0.0);
+        hands.put("Straight Flush", 0.0);
+        hands.put("Royal Flush", 0.0);
+        /* TODO: Reorder hands starting with: no pair (DONE), one pair, two pair, three of a kind, 
          * straight, flush, full house, four of a kind, straight flush, royal flush
           */
-
-        //Creates an array 'counts' to store each time one of the checks returns true
-        double[] counts = new double[7];
         for(int i = 0; i < runs; i++){
             drawFive();
             if(checkPair()){
-                counts[0] = counts[0] + 1;
                 hands.put("Pair", hands.get("Pair") + 1 );
             }
             if(checkThreeOfKind()){
-                counts[1] = counts[1] + 1;
                 hands.put("Three of a Kind", hands.get("Three of a Kind") + 1 );
             }
             if(checkTwoPairs()){
-                counts[2] = counts[2] + 1;
                 hands.put("Two Pairs", hands.get("Two Pairs") + 1 );
             }
             if(checkStraight()){
-                counts[3] = counts[3] + 1;
                 hands.put("Straight", hands.get("Straight") + 1 );
             }
             if(checkFullHouse()){
-                counts[4] = counts[4] + 1;
                 hands.put("FullHouse", hands.get("FullHouse") + 1 );
             }
             if(checkFlush()){
-                counts[5] = counts[5] + 1;
                 hands.put("Flush", hands.get("Flush") + 1 );
             }
             if(checkFourOfKind()){
-                counts[6] = counts[6] + 1;
                 hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
+            }
+            if(checkNoPair()){
+                hands.put("No Pair", hands.get("No Pair") + 1);
             }
             deck.reset();
         }
         //Formats and displays the percents in an appropriate manner
-        System.out.printf("Pair: %.2f", (counts[0]/runs) * 100);
+        System.out.printf("Pair: %.2f", (hands.get("Pair")/runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Three Of A Kind: %.2f", (counts[1]/runs) * 100);
+        System.out.printf("Three Of A Kind: %.2f", (hands.get("Three of a Kind")/runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Two Pairs: %.2f", (counts[2]/runs) * 100);
+        System.out.printf("Two Pairs: %.2f", (hands.get("Two Pairs")/runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Straights: %.2f", (counts[3]/runs) * 100);
+        System.out.printf("Straights: %.2f", (hands.get("Straight")/runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Full House: %.2f", (counts[4]/runs) * 100);
+        System.out.printf("Full House: %.2f", (hands.get("FullHouse")/runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Flush: %.2f", (counts[5] / runs) * 100);
+        System.out.printf("Flush: %.2f", (hands.get("Flush")/ runs) * 100);
         System.out.print("%\n");
-        System.out.printf("Four Of A Kind: %.3f", (counts[6] / runs) * 100);
+        System.out.printf("Four Of A Kind: %.3f", (hands.get("Four of a Kind")/ runs) * 100);
         System.out.print("%\n");
-                //TODO: add Royal Flush, Straight Flush, No Pair/High Card
-        System.out.println("Pair from map: " + (hands.get("Pair")));
+                //TODO: add Royal Flush, Straight Flush, No Pair/High Card (NO PAIR DONE)
+        System.out.printf("No Pair: %.2f%s%n", (hands.get("No Pair")/runs) * 100, "%");
     }
 
     /**
