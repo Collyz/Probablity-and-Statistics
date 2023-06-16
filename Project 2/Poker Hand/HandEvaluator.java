@@ -179,11 +179,13 @@ public class HandEvaluator {
                 }
             }
         }
-        /* */
 
         //If there are five instances of a card being exactly one greater than the next returns true
-        return check == 5;
-
+        if(check == 5 && !checkStraightFlush()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -229,10 +231,13 @@ public class HandEvaluator {
             }
         }
         //If there is 5 of the same suite in the hand then the method returns true
-        return spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5;
+        return (spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5) && !checkStraightFlush();
 
     }
 
+    public boolean checkStraightFlush(){
+        return checkStraight() && checkFlush();
+    }
     /**
      * Checks if there are 4 of a kind in the hand
      * @return The result if and only if a 4 of a kind is found in the hand
@@ -326,8 +331,13 @@ public class HandEvaluator {
         System.out.print("%\n");
         System.out.printf("Four Of A Kind: %.3f", (hands.get("Four of a Kind")/ runs) * 100);
         System.out.print("%\n");
-                //TODO: add Royal Flush, Straight Flush, No Pair/High Card (NO PAIR DONE)
+                //TODO: add Royal Flush, Straight Flush, No Pair/High Card (NO PAIR DONE), ""
         System.out.printf("No Pair: %.2f%s%n", (hands.get("No Pair")/runs) * 100, "%");
+        double totalPercent = ((hands.get("Pair")/runs) + (hands.get("Three of a Kind")/runs) +
+                                    (hands.get("Two Pairs")/runs) + (hands.get("Straight")/runs) + 
+                                    (hands.get("FullHouse")/runs) + (hands.get("Flush")/ runs) +
+                                    (hands.get("Flush")/ runs) + (hands.get("Four of a Kind")/ runs) + (hands.get("No Pair")/runs)) * 100;
+        System.out.println(totalPercent);
     }
 
     /**
