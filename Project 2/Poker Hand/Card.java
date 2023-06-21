@@ -58,8 +58,21 @@ public class Card implements Comparable<Card>{
     }
 
     @Override
+    /**
+     * 
+     */
     public int compareTo(Card other) {
-        return Integer.compare(this.cardNum, other.cardNum);
+        int numCompare = Integer.compare(this.cardNum, other.cardNum);
+        int suiteCompare = this.suite.compareTo(other.suite);
+        return numCompare + suiteCompare;
+    }
+
+    public void setCardNum(int cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public void setSuite(String suite) {
+        this.suite = suite;
     }
     
 }

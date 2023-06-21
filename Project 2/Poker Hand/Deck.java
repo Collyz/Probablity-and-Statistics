@@ -8,7 +8,10 @@ public class Deck {
     private final int CARD_LIMIT = 14; //Determines how many cards will be in each suite
     private ArrayList<Card> deck;     //Stores the Card objects     
     private SplittableRandom rand;    //Used to create a random shuffle
-
+    private final String SPADES = "Spades";
+    private final String HEARTS = "Hearts";
+    private final String DIAMONDS = "Diamonds";
+    private final String CLUBS = "Clubs";
     /**
     * Constructor of the class. Accepts no parameters and initializes
     * two private variables, hand ArrayList and rand Random
@@ -23,10 +26,10 @@ public class Deck {
      */
     public void fillDeck(){
         for(int i = 1; i < CARD_LIMIT; i++){
-            deck.add(new Card("Spades", i));
-            deck.add(new Card("Hearts", i));
-            deck.add(new Card("Diamonds", i));
-            deck.add(new Card("Clubs", i));
+            deck.add(new Card(SPADES, i));
+            deck.add(new Card(HEARTS, i));
+            deck.add(new Card(DIAMONDS, i));
+            deck.add(new Card(CLUBS, i));
         }
     }
 
@@ -77,7 +80,7 @@ public class Deck {
      * Check to see if there are still cards in the deck.
      * @return Boolean card status for the deck
      */
-    public boolean handStatus(){
+    public boolean deckStatus(){
         if(deck.size() >= 1){
             return true;    //True if there are cards in ArrayList hand
         }

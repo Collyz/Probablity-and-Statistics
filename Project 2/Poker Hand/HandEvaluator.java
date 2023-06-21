@@ -9,6 +9,28 @@ public class HandEvaluator {
     private Deck deck;              //Creates the deck to evaluate
     private ArrayList<Card> hand;   //Creates the hand to evaluate
     private final int HAND_SIZE = 5;
+    private final Card[] SPADES_ROYAL_FLUSH = {
+        new Card("Spades", 13), new Card("Hearts", 12),
+        new Card("Diamonds", 11), new Card("Clubs", 10),
+        new Card("Spades", 1)
+    };
+
+    private final Card[] HEARTS_ROYAL_FLUSH = {
+        new Card("Hearts", 13), new Card("Hearts", 12),
+        new Card("Hearts", 11), new Card("Hearts", 10),
+        new Card("Hearts", 1)
+    };
+
+    private final Card[] DIAMONDS_ROYAL_FLUSH = {
+        new Card("Diamonds", 13), new Card("Diamonds", 12),
+        new Card("Diamonds", 11), new Card("Diamonds", 10),
+        new Card("Diamonds", 1)
+    };
+    private final Card[] CLUBS_ROYAL_FLUSH = {
+        new Card("Clubs", 13), new Card("Clubs", 12),
+        new Card("Clubs", 11), new Card("Clubs", 10),
+        new Card("Clubs", 1)
+    };
 
     /**
      * Constructor of the class accepts no parameters.
@@ -31,7 +53,7 @@ public class HandEvaluator {
             hand.clear();
         }
         //Checks to see if cards can still be drawn. If true then 5 cards are drawn and displayed
-        if(deck.handStatus()) {
+        if(deck.deckStatus()) {
             //String print = "";
             deck.shuffle();
             //Draws 5 Cards and puts them into the ArrayList hand
@@ -316,26 +338,14 @@ public class HandEvaluator {
     }
 
     public boolean checkRoyalFlush(){
-        sortDescending(this.hand);
-        /* Flush check */
-        int check = 0;
-        int sum = 0;  //If the sum is 
-        for(int i = 0; i < hand.size(); i++){
-            sum += hand.get(i).getCardNum();
-            for(int j = i+1; j < hand.size(); j++){
-                if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
-                    check++;
-                }
-            }
-        }
-        return check == 5 && sum == 47;
+        return false;
     }
 
     /** The method 'runAll' accepts one integer runs
      * The method runs all the hand checks given a number of runs and presents it as a percentage
      * @param runs  The number of times to iterate the loop in the method
      */
-    public void runAll(int runs) {
+    public void runAll(int runs, boolean drawFlag) {
         //Map to hold the values
         HashMap<String, Double> hands = new HashMap<String, Double>();
         hands.put("Pair", 0.0);
@@ -350,9 +360,9 @@ public class HandEvaluator {
         hands.put("Royal Flush", 0.0);
         /* TODO: Reorder hands starting with: no pair (DONE), one pair, two pair, three of a kind, 
          * straight, flush, full house, four of a kind, straight flush, royal flush
-          */
+         */
         for(int i = 0; i < runs; i++){
-            drawFive();
+            if(drawFlag) drawFive();
             if(checkNoPair()){
                 hands.put("No Pair", hands.get("No Pair") + 1);
             }
@@ -380,6 +390,9 @@ public class HandEvaluator {
             }
             if(checkFourOfKind()){
                 hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
+            }
+            if(checkRoyalFlush()){
+                hands.put("Royal Flush", hands.get("Royal Flush") + 1 );
             }
             deck.reset();
         }
@@ -495,13 +508,28 @@ public class HandEvaluator {
         Collections.swap(a, i, j);
     }
 
-    public Card getCard(String suite, int cardNum){
-        if(deck.handStatus()){
+    public Card drawCard(String suite, int cardNum){
+        if(deck.deckStatus()){
             Card result = deck.drawCard(suite, cardNum); 
             System.out.println(result.toString());
             return result;
         }
         return null;
+    }
+
+    public void forceHand(Card[] cards){
+        drawFive();
+        if(cards.length > 5){
+            System.out.println("Too many cards, try again");
+        }else if(cards.length == 0){
+            System.out.println("Not enough cards, try again");
+        }
+        else{
+            for(int i = 0; i < cards.length; i++){
+                hand.set(i, cards[i]);
+            }
+        }
+        
     }
 
 
