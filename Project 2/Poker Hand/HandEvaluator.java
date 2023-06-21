@@ -39,8 +39,6 @@ public class HandEvaluator {
                 hand.add(deck.drawCard());
                 //print += hand.get(i) + " | ";
             }
-            //print = print.substring(0, print.length() - 2); //Allows for the 5 cards that are drawn to be displayed if needed
-            //System.out.println(print);
             return true;
         }
         else{
@@ -496,4 +494,15 @@ public class HandEvaluator {
     private void swap(ArrayList<Card> a, int i, int j){
         Collections.swap(a, i, j);
     }
+
+    public Card getCard(String suite, int cardNum){
+        if(deck.handStatus()){
+            Card result = deck.drawCard(suite, cardNum); 
+            System.out.println(result.toString());
+            return result;
+        }
+        return null;
+    }
+
+
 }

@@ -63,6 +63,16 @@ public class Deck {
         }
     }
 
+    public Card drawCard(String suite, int cardNum){
+        Card temp = new Card(suite, cardNum);
+        for(int i = 0; i < deck.size(); i++){
+            if(deck.get(i).compareTo(temp) == 0){
+                return deck.remove(i);
+            }
+        }
+        return null;
+    }
+
     /**
      * Check to see if there are still cards in the deck.
      * @return Boolean card status for the deck

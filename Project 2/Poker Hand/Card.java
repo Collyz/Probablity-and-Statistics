@@ -1,4 +1,4 @@
-public class Card {
+public class Card implements Comparable<Card>{
 
     private int cardNum; //Stores card number
     private String suite; //Stores card suite
@@ -14,6 +14,7 @@ public class Card {
         this.suite = suite;
     }
 
+    @Override
     /**
      * It is used when wanting to print the value of a card
      * Cards of value 1 are "Ace"
@@ -56,4 +57,9 @@ public class Card {
         return suite;
     }
 
+    @Override
+    public int compareTo(Card other) {
+        return Integer.compare(this.cardNum, other.cardNum);
+    }
+    
 }
