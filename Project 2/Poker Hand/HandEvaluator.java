@@ -6,8 +6,9 @@ import java.util.HashMap;
 
 public class HandEvaluator {
 
-    private Deck deck;  //Creates the deck to evaluate
+    private Deck deck;              //Creates the deck to evaluate
     private ArrayList<Card> hand;   //Creates the hand to evaluate
+    private final int HAND_SIZE = 5;
 
     /**
      * Constructor of the class accepts no parameters.
@@ -17,6 +18,7 @@ public class HandEvaluator {
         deck = new Deck();
         deck.fillDeck();
         hand = new ArrayList<>();
+    
     }
 
     /**
@@ -33,7 +35,7 @@ public class HandEvaluator {
             //String print = "";
             deck.shuffle();
             //Draws 5 Cards and puts them into the ArrayList hand
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < HAND_SIZE; i++) {
                 hand.add(deck.drawCard());
                 //print += hand.get(i) + " | ";
             }
@@ -181,7 +183,7 @@ public class HandEvaluator {
         }
 
         //If there are five instances of a card being exactly one greater than the next returns true
-        if(check == 5 && !checkStraightFlush()){
+        if(check == 5){
             return true;
         }else{
             return false;
@@ -231,13 +233,60 @@ public class HandEvaluator {
             }
         }
         //If there is 5 of the same suite in the hand then the method returns true
-        return (spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5) && !checkStraightFlush();
+        return (spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5);
 
     }
 
+    /**
+     * Checks if there is a straight flush in the hand
+     * @return The result if and only if a straight flush is found in the hand
+     */
     public boolean checkStraightFlush(){
-        return checkStraight() && checkFlush();
+        boolean straight = false;
+        boolean flush = false;
+
+        /* Straight check */
+        int check = 0;  // If a card is larger than the next, check++
+        // Sort the hand in descending order (largest -> smallest)
+        sortDescending(this.hand);
+        for(int i = 0; i < hand.size(); i++){
+            for(int j = i+1; j < hand.size(); j++){
+                if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
+                    check++;
+                }
+            }
+        }
+        if(check == 5) straight = true;
+
+        /* Flush check */
+        //Stores the suites of each kind found
+        int spadesCount = 0;
+        int heartsCount = 0;
+        int diamondsCount = 0;
+        int clubsCount = 0;
+        //The check done for the whole hand
+        for(int i = 0; i < hand.size(); i++){
+            if(hand.get(i).getSuite().equals("Spades")){
+                spadesCount++;
+            }
+            if(hand.get(i).getSuite().equals("Hearts")){
+                heartsCount++;
+            }
+            if(hand.get(i).getSuite().equals("Diamonds")){
+                diamondsCount++;
+            }
+            if(hand.get(i).getSuite().equals("Clubs")){
+                clubsCount++;
+            }
+        }
+        if(spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5) flush = true;
+        if(straight && flush){
+            return true;
+        }else{
+            return false;
+        }
     }
+    
     /**
      * Checks if there are 4 of a kind in the hand
      * @return The result if and only if a 4 of a kind is found in the hand
@@ -268,6 +317,22 @@ public class HandEvaluator {
         else{return false;}
     }
 
+    public boolean checkRoyalFlush(){
+        sortDescending(this.hand);
+        /* Flush check */
+        int check = 0;
+        int sum = 0;  //If the sum is 
+        for(int i = 0; i < hand.size(); i++){
+            sum += hand.get(i).getCardNum();
+            for(int j = i+1; j < hand.size(); j++){
+                if(hand.get(i).getCardNum() - 1 == hand.get(j).getCardNum()){
+                    check++;
+                }
+            }
+        }
+        return check == 5 && sum == 47;
+    }
+
     /** The method 'runAll' accepts one integer runs
      * The method runs all the hand checks given a number of runs and presents it as a percentage
      * @param runs  The number of times to iterate the loop in the method
@@ -290,6 +355,9 @@ public class HandEvaluator {
           */
         for(int i = 0; i < runs; i++){
             drawFive();
+            if(checkNoPair()){
+                hands.put("No Pair", hands.get("No Pair") + 1);
+            }
             if(checkPair()){
                 hands.put("Pair", hands.get("Pair") + 1 );
             }
@@ -308,14 +376,16 @@ public class HandEvaluator {
             if(checkFlush()){
                 hands.put("Flush", hands.get("Flush") + 1 );
             }
+            if(checkStraightFlush()){
+                hands.put("Straight Flush", hands.get("Straight Flush") + 1 );
+                System.out.println("Added to");
+            }
             if(checkFourOfKind()){
                 hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
             }
-            if(checkNoPair()){
-                hands.put("No Pair", hands.get("No Pair") + 1);
-            }
             deck.reset();
         }
+        
         //Formats and displays the percents in an appropriate manner
         System.out.printf("Pair: %.2f", (hands.get("Pair")/runs) * 100);
         System.out.print("%\n");
@@ -331,13 +401,12 @@ public class HandEvaluator {
         System.out.print("%\n");
         System.out.printf("Four Of A Kind: %.3f", (hands.get("Four of a Kind")/ runs) * 100);
         System.out.print("%\n");
-                //TODO: add Royal Flush, Straight Flush, No Pair/High Card (NO PAIR DONE), ""
-        System.out.printf("No Pair: %.2f%s%n", (hands.get("No Pair")/runs) * 100, "%");
-        double totalPercent = ((hands.get("Pair")/runs) + (hands.get("Three of a Kind")/runs) +
-                                    (hands.get("Two Pairs")/runs) + (hands.get("Straight")/runs) + 
-                                    (hands.get("FullHouse")/runs) + (hands.get("Flush")/ runs) +
-                                    (hands.get("Flush")/ runs) + (hands.get("Four of a Kind")/ runs) + (hands.get("No Pair")/runs)) * 100;
-        System.out.println(totalPercent);
+        System.out.printf("Straight Flush: %.6f", (hands.get("Straight Flush")));
+        System.out.print("%\n");
+        System.out.printf("Royal Flush: %.6f", (hands.get("Royal Flush")));
+        System.out.print("%\n");
+        System.out.printf("No Pair: %.2f", (hands.get("No Pair")/runs) * 100);
+        System.out.print("%\n");
     }
 
     /**

@@ -4,6 +4,6 @@ public class Tester {
 
         //Evaluates the likely hood of poker hands given a certain number of runs
         HandEvaluator evaluator = new HandEvaluator();
-        evaluator.runAll(110);
+        evaluator.runAll(1000000);
     }
 }
