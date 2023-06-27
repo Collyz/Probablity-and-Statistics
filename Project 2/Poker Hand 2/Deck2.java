@@ -67,4 +67,10 @@ public class Deck2 {
             return null;
         }
     }
+
+    public void printDeck(){
+        for(Card2 cards: deck){
+            System.out.println(cards.toString());
+        }
+    }
 }
