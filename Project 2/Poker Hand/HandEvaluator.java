@@ -362,7 +362,9 @@ public class HandEvaluator {
          * straight, flush, full house, four of a kind, straight flush, royal flush
          */
         for(int i = 0; i < runs; i++){
-            if(drawFlag) drawFive();
+            if(drawFlag){
+                drawFive();
+            }
             if(checkNoPair()){
                 hands.put("No Pair", hands.get("No Pair") + 1);
             }
@@ -386,7 +388,6 @@ public class HandEvaluator {
             }
             if(checkStraightFlush()){
                 hands.put("Straight Flush", hands.get("Straight Flush") + 1 );
-                System.out.println("Added to");
             }
             if(checkFourOfKind()){
                 hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
@@ -394,7 +395,7 @@ public class HandEvaluator {
             if(checkRoyalFlush()){
                 hands.put("Royal Flush", hands.get("Royal Flush") + 1 );
             }
-            deck.reset();
+            //deck.reset();
         }
         
         //Formats and displays the percents in an appropriate manner
@@ -518,6 +519,7 @@ public class HandEvaluator {
     }
 
     public void forceHand(Card[] cards){
+        deck.fillDeck();
         drawFive();
         if(cards.length > 5){
             System.out.println("Too many cards, try again");

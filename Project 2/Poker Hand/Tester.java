@@ -10,7 +10,6 @@ public class Tester {
         forceCards[2] = evaluator.drawCard("Clubs", 11);
         forceCards[3] = evaluator.drawCard("Clubs", 12);
         forceCards[4] = evaluator.drawCard("Clubs", 13);
-        System.out.println(forceCards.length);
         evaluator.forceHand(forceCards);
         evaluator.runAll(1, false);
     }

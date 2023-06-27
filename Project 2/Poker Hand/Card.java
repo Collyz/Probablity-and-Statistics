@@ -64,6 +64,7 @@ public class Card implements Comparable<Card>{
     public int compareTo(Card other) {
         int numCompare = Integer.compare(this.cardNum, other.cardNum);
         int suiteCompare = this.suite.compareTo(other.suite);
+        System.out.println(numCompare + suiteCompare);
         return numCompare + suiteCompare;
     }
 
