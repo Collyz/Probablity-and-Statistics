@@ -10,26 +10,28 @@ public class Deck2 {
     private final String DIAMONDS = "Diamonds";
     private final String CLUBS = "Clubs";
 
-    public Deck(){
-        deck = new Arraylist<>(52);
+    public Deck2(){
+        deck = new ArrayList<>(52);
         rand = new SplittableRandom(); 
     }
 
     public void fillDeck(){
         for(int i = 1; i < CARD_LIMIT; i++){
-            deck.add(new Card(SPADES, i));
-            deck.add(new Card(HEARTS, i));
-            deck.add(new Card(DIAMONDS, i));
-            deck.add(new Card(CLUBS, i));
+            deck.add(new Card2(SPADES, i));
+            deck.add(new Card2(HEARTS, i));
+            deck.add(new Card2(DIAMONDS, i));
+            deck.add(new Card2(CLUBS, i));
         }
     }
 
     public void shuffle(){
         if(deck.size() > 5){
-            for(int i = 0; i < deck.size() + 100; i++){
-                int tempNum = rand.nextInt(deck.size());
-                Card2 temp = deck.remove(index);
-                deck.add(temp);
+            for(int i = 0; i < deck.size() + 1000; i++){
+                int index1 = rand.nextInt(deck.size());
+                int index2 = rand.nextInt(deck.size());
+                Card2 temp = deck.get(index2);
+                deck.set(index2, deck.get(index1));
+                deck.set(index1, temp);
             }
         }else{
             System.out.println("Only 5 or fewer cards remain, no need to shuffle");
