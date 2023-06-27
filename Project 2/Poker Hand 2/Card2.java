@@ -1,7 +1,9 @@
 public class Card2 implements Comparable<Card2>{
     private boolean royalFlag;
+    private boolean royalFlushFlag;
     private String suite;
     private int cardNum;
+    
 
     /**
      * Constructor for the class
@@ -11,10 +13,15 @@ public class Card2 implements Comparable<Card2>{
     public Card2(String suite, int cardNum){
         this.suite = suite;
         this.cardNum = cardNum;
-        if(cardNum > 10){
+        if(cardNum > 10 || cardNum == 1){
             this.royalFlag = true;
+            this.royalFlushFlag = true;
+        }else if(cardNum == 10){
+            this.royalFlag = false;
+            this.royalFlushFlag = true;
         }else{
             this.royalFlag = false;
+            this.royalFlushFlag = false;
         }
     }
 
@@ -24,6 +31,14 @@ public class Card2 implements Comparable<Card2>{
 
     public void setRoyalFlag(boolean royalFlag) {
         this.royalFlag = royalFlag;
+    }
+
+    public boolean isRoyalFlushFlag() {
+        return royalFlushFlag;
+    }
+
+    public void setRoyalFlushFlag(boolean royalFlushFlag) {
+        this.royalFlushFlag = royalFlushFlag;
     }
 
     public String getSuite() {
@@ -76,7 +91,6 @@ public class Card2 implements Comparable<Card2>{
 
     @Override
     public int compareTo(Card2 o) {
-        
         return Integer.compare(this.cardNum, o.cardNum);
     }
 }
