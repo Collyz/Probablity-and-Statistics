@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Hand {
     
@@ -73,7 +74,7 @@ public class Hand {
         int counter = 0;
         Arrays.sort(this.hand);
         for(int i = 0; i < hand.length; i++){
-            for(int j = 0; j < hand.length; i++){
+            for(int j = 0; j < hand.length; j++){
                 if(hand[i].getCardNum() == hand[j].getCardNum()-1){
                     counter++;
                 }
@@ -130,9 +131,6 @@ public class Hand {
                 royalFlushCount++;
             }
         }
-        if(royalCount == 4 && royalFlushCount == 5){
-            System.out.println("Success");
-        }
         return royalCount == 4 && royalFlushCount == 5;
     }
 
@@ -145,11 +143,77 @@ public class Hand {
     }
 
     public void run(int runs){
+        //Map to hold the values
+        HashMap<String, Double> hands = new HashMap<String, Double>();
+        hands.put("Pair", 0.0);
+        hands.put("Three of a Kind", 0.0);
+        hands.put("Two Pairs", 0.0);
+        hands.put("Straight", 0.0);
+        hands.put("FullHouse", 0.0);
+        hands.put("Flush", 0.0);
+        hands.put("Four of a Kind", 0.0);
+        hands.put("No Pair", 0.0);
+        hands.put("Straight Flush", 0.0);
+        hands.put("Royal Flush", 0.0);
+        /* TODO: Reorder hands starting with: no pair (DONE), one pair, two pair, three of a kind, 
+         * straight, flush, full house, four of a kind, straight flush, royal flush
+         */
         for(int i = 0; i < runs; i++){
             deck.shuffle();
-            for(int j = 0; j < 10; i++){
-
+            hand = deck.drawFiveCards();
+            if(checkNoPair()){
+                hands.put("No Pair", hands.get("No Pair") + 1);
             }
+            if(checkPair()){
+                hands.put("Pair", hands.get("Pair") + 1 );
+            }
+            if(checkThreeOfKind()){
+                hands.put("Three of a Kind", hands.get("Three of a Kind") + 1 );
+            }
+            if(checkTwoPair()){
+                hands.put("Two Pairs", hands.get("Two Pairs") + 1 );
+            }
+            if(checkStraight()){
+                hands.put("Straight", hands.get("Straight") + 1 );
+            }
+            if(checkFullHouse()){
+                hands.put("FullHouse", hands.get("FullHouse") + 1 );
+            }
+            if(checkFlush()){
+                hands.put("Flush", hands.get("Flush") + 1 );
+            }
+            if(checkStraightFlush()){
+                hands.put("Straight Flush", hands.get("Straight Flush") + 1 );
+            }
+            if(checkFourOfKind()){
+                hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
+            }
+            if(checkRoyalFlush()){
+                hands.put("Royal Flush", hands.get("Royal Flush") + 1 );
+            }
+            deck.fillDeck();
         }
+        
+        //Formats and displays the percents in an appropriate manner
+        System.out.printf("Pair: %.2f", (hands.get("Pair")/runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Three Of A Kind: %.2f", (hands.get("Three of a Kind")/runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Two Pairs: %.2f", (hands.get("Two Pairs")/runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Straights: %.2f", (hands.get("Straight")/runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Full House: %.2f", (hands.get("FullHouse")/runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Flush: %.2f", (hands.get("Flush")/ runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Four Of A Kind: %.3f", (hands.get("Four of a Kind")/ runs) * 100);
+        System.out.print("%\n");
+        System.out.printf("Straight Flush: %.6f", (hands.get("Straight Flush")));
+        System.out.print("%\n");
+        System.out.printf("Royal Flush: %.6f", (hands.get("Royal Flush")));
+        System.out.print("%\n");
+        System.out.printf("No Pair: %.2f", (hands.get("No Pair")/runs) * 100);
+        System.out.print("%\n");
     }
 }
