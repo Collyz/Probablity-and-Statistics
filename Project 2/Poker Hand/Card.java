@@ -29,14 +29,11 @@ public class Card implements Comparable<Card>{
         }
         else if(cardNum == 11){
             name = "Jack";
-        }
-        else if(cardNum == 12){
+        }else if(cardNum == 12){
             name = "Queen";
-        }
-        else if(cardNum == 13){
+        }else if(cardNum == 13){
             name = "King";
-        }
-        else{
+        }else{
             name = Integer.toString(cardNum);
         }
         return name + " of " + suite;
