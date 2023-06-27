@@ -67,6 +67,12 @@ public class Card2 {
         return false;
     }
     
+    public boolean compare(String suite, int cardNum){
+        if(this.suite == suite && this.cardNum == cardNum){
+            return true;
+        }
+        return false;
+    }
 
     
 
