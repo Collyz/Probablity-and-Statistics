@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Hand {
     
     private Card2[] hand;
@@ -40,6 +42,23 @@ public class Hand {
         return counter;
     }
 
+    private int checkThreeOfKindInt(){
+        int counter = 0;
+        //Triple for loop to evaluate for three of a kind
+        for(int i = 0; i < hand.length; i++){
+            for(int j = i + 1; j < hand.length; j++){
+                for(int k = j + 1; k < hand.length; k++) {
+                    //Main check for three of a kind
+                    if (hand[i].getCardNum() == hand[j].getCardNum() && hand[j].getCardNum() == hand[k].getCardNum()) {
+                        counter++;
+                    }
+                }
+            }
+        }
+        //Number of Three of a Kinds found
+        return counter;
+    }
+
     public boolean checkNoPair(){
         return checkPairInt() == 0;
     }
@@ -53,9 +72,22 @@ public class Hand {
     }
 
     public boolean checkThreeOfKind(){
-        return false;
+        return checkThreeOfKindInt() == 1;
     }
     
+    public boolean checkStraight(){
+        Arrays.sort(this.hand);
+        System.out.println(Arrays.toString(this.hand));
+        return false;
+    }
+
+    public void printHand(){
+        System.out.println(Arrays.toString(hand));
+    }
+
+    public void printDeck(){
+        deck.printDeck();
+    }
 
 
 }

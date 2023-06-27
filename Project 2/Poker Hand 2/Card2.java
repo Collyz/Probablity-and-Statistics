@@ -1,4 +1,4 @@
-public class Card2 {
+public class Card2 implements Comparable<Card2>{
     private boolean royalFlag;
     private String suite;
     private int cardNum;
@@ -74,6 +74,9 @@ public class Card2 {
         return false;
     }
 
-    
-
+    @Override
+    public int compareTo(Card2 o) {
+        
+        return Integer.compare(this.cardNum, o.cardNum);
+    }
 }

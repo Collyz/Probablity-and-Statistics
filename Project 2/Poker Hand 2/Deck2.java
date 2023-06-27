@@ -50,7 +50,7 @@ public class Deck2 {
 
     public Card2 drawSingleCard(){
         try{
-            return deck.get(0);
+            return deck.remove(0);
         }catch(IndexOutOfBoundsException e){
             e.printStackTrace();
             return null;
@@ -60,7 +60,7 @@ public class Deck2 {
     public Card2[] drawFiveCards(){
         Card2[] drawn = new Card2[5];
         try{
-            for(int i = 0; i < 5;i++){
+            for(int i = 0; i < 5; i++){
                 drawn[i] = drawSingleCard();
             }
             return drawn;
@@ -75,4 +75,5 @@ public class Deck2 {
             System.out.println(cards.toString());
         }
     }
+    
 }
