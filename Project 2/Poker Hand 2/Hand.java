@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -14,6 +15,10 @@ public class Hand {
 
     public void fillHand(){
         hand = deck.drawFiveCards();
+    }
+
+    public void shuffleDeck(){
+        deck.shuffle();
     }
 
     public void drawSpecificCard(String suite, int cardNum, int handIndex){
@@ -54,37 +59,37 @@ public class Hand {
         return counter;
     }
 
-    public boolean checkNoPair(){
-        return checkPairInt() == 0;
+    public boolean checkNoPair(int pairCount){
+        return pairCount == 0;
     }
 
-    public boolean checkPair(){
-        return checkPairInt() == 1;
+    public boolean checkPair(int pairCount){
+        return pairCount == 1;
     }
 
-    public boolean checkTwoPair(){
-        return checkPairInt() == 2;
+    public boolean checkTwoPair(int pairCount){
+        return pairCount == 2;
     }
 
-    public boolean checkThreeOfKind(){
-        return checkThreeOfKindInt() == 1;
+    public boolean checkThreeOfKind(int pairCount){
+        return pairCount == 1;
     }
     
     public boolean checkStraight(){
         int counter = 0;
         Arrays.sort(this.hand);
         for(int i = 0; i < hand.length; i++){
-            for(int j = 0; j < hand.length; j++){
-                if(hand[i].getCardNum() == hand[j].getCardNum()-1){
+            if(i+1 < hand.length){
+                if(hand[i].getCardNum() == hand[i+1].getCardNum()-1){
                     counter++;
                 }
             }
         }
-        return counter == 5;
+        return counter == 4;
     }
 
-    public boolean checkFullHouse(){
-        return (checkPairInt() + checkThreeOfKindInt()) == 5;
+    public boolean checkFullHouse(int pairCount, int threeKindCount){
+        return (pairCount + threeKindCount) == 5;
     }
 
     public boolean checkFlush(){
@@ -109,6 +114,9 @@ public class Hand {
             }
         }
         //If there is 5 of the same suite in the hand then the method returns true
+        if(spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5){
+            printHand();
+        }
         return (spadesCount == 5|| heartsCount == 5|| diamondsCount == 5 || clubsCount == 5);
     }
 
@@ -131,7 +139,11 @@ public class Hand {
                 royalFlushCount++;
             }
         }
-        return royalCount == 4 && royalFlushCount == 5;
+        if(royalCount == 4 && royalFlushCount == 5 && checkFlush()){
+            printHand();
+            return true;
+        }
+        return false;
     }
 
     public void printHand(){
@@ -155,28 +167,31 @@ public class Hand {
         hands.put("No Pair", 0.0);
         hands.put("Straight Flush", 0.0);
         hands.put("Royal Flush", 0.0);
-        /* TODO: Reorder hands starting with: no pair (DONE), one pair, two pair, three of a kind, 
-         * straight, flush, full house, four of a kind, straight flush, royal flush
-         */
+        ArrayList<Integer> sums = new ArrayList<>();
         for(int i = 0; i < runs; i++){
-            deck.shuffle();
-            hand = deck.drawFiveCards();
-            if(checkNoPair()){
+            shuffleDeck();
+            fillHand();
+            if(i%5 == 0){
+                deck.fillDeck();
+            }
+            int pairCount = checkPairInt();
+            int threeKindCount = checkThreeOfKindInt();
+            if(checkNoPair(pairCount)){
                 hands.put("No Pair", hands.get("No Pair") + 1);
             }
-            if(checkPair()){
+            if(checkPair(pairCount)){
                 hands.put("Pair", hands.get("Pair") + 1 );
             }
-            if(checkThreeOfKind()){
+            if(checkThreeOfKind(pairCount)){
                 hands.put("Three of a Kind", hands.get("Three of a Kind") + 1 );
             }
-            if(checkTwoPair()){
+            if(checkTwoPair(pairCount)){
                 hands.put("Two Pairs", hands.get("Two Pairs") + 1 );
             }
             if(checkStraight()){
                 hands.put("Straight", hands.get("Straight") + 1 );
             }
-            if(checkFullHouse()){
+            if(checkFullHouse(pairCount, threeKindCount)){
                 hands.put("FullHouse", hands.get("FullHouse") + 1 );
             }
             if(checkFlush()){
@@ -191,10 +206,11 @@ public class Hand {
             if(checkRoyalFlush()){
                 hands.put("Royal Flush", hands.get("Royal Flush") + 1 );
             }
-            deck.fillDeck();
         }
         
         //Formats and displays the percents in an appropriate manner
+        System.out.printf("No Pair: %.2f", (hands.get("No Pair")/runs) * 100);
+        System.out.print("%\n");
         System.out.printf("Pair: %.2f", (hands.get("Pair")/runs) * 100);
         System.out.print("%\n");
         System.out.printf("Three Of A Kind: %.2f", (hands.get("Three of a Kind")/runs) * 100);
@@ -213,7 +229,6 @@ public class Hand {
         System.out.print("%\n");
         System.out.printf("Royal Flush: %.6f", (hands.get("Royal Flush")));
         System.out.print("%\n");
-        System.out.printf("No Pair: %.2f", (hands.get("No Pair")/runs) * 100);
-        System.out.print("%\n");
+        
     }
 }
