@@ -124,8 +124,8 @@ public class Hand {
         return checkStraight() && checkFlush();
     }
 
-    public boolean checkFourOfKind(){
-        return checkPairInt() == 6;
+    public boolean checkFourOfKind(int pairCount){
+        return pairCount == 6;
     }
 
     public boolean checkRoyalFlush(){
@@ -140,7 +140,6 @@ public class Hand {
             }
         }
         if(royalCount == 4 && royalFlushCount == 5 && checkFlush()){
-            printHand();
             return true;
         }
         return false;
@@ -167,44 +166,18 @@ public class Hand {
         hands.put("No Pair", 0.0);
         hands.put("Straight Flush", 0.0);
         hands.put("Royal Flush", 0.0);
-        ArrayList<Integer> sums = new ArrayList<>();
         for(int i = 0; i < runs; i++){
             shuffleDeck();
             fillHand();
-            if(i%5 == 0){
+            if(i%20 == 0){
                 deck.fillDeck();
             }
             int pairCount = checkPairInt();
             int threeKindCount = checkThreeOfKindInt();
             if(checkNoPair(pairCount)){
-                hands.put("No Pair", hands.get("No Pair") + 1);
-            }
-            if(checkPair(pairCount)){
-                hands.put("Pair", hands.get("Pair") + 1 );
-            }
-            if(checkThreeOfKind(pairCount)){
-                hands.put("Three of a Kind", hands.get("Three of a Kind") + 1 );
-            }
-            if(checkTwoPair(pairCount)){
-                hands.put("Two Pairs", hands.get("Two Pairs") + 1 );
-            }
-            if(checkStraight()){
-                hands.put("Straight", hands.get("Straight") + 1 );
-            }
-            if(checkFullHouse(pairCount, threeKindCount)){
-                hands.put("FullHouse", hands.get("FullHouse") + 1 );
-            }
-            if(checkFlush()){
-                hands.put("Flush", hands.get("Flush") + 1 );
-            }
-            if(checkStraightFlush()){
-                hands.put("Straight Flush", hands.get("Straight Flush") + 1 );
-            }
-            if(checkFourOfKind()){
-                hands.put("Four of a Kind", hands.get("Four of a Kind") + 1 );
-            }
-            if(checkRoyalFlush()){
-                hands.put("Royal Flush", hands.get("Royal Flush") + 1 );
+               hands.put("No Pair", hands.get("No Pair") + 1);
+            }else if(checkPair(pairCount)){
+                
             }
         }
         

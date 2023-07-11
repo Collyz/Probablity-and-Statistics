@@ -27,7 +27,7 @@ public class Deck2 {
     public void shuffle(){
         if(deck.size() > 5){
             for(int i = 0; i < deck.size(); i++){
-                int index1 = rand.nextInt(deck.size());
+                int index1 = i; //rand.nextInt(deck.size());
                 int index2 = rand.nextInt(deck.size());
                 Card2 temp = deck.get(index2);
                 deck.set(index2, deck.get(index1));
